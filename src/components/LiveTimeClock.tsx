@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const LiveTimeClock: FC = (): JSX.Element => {
   return (
     <ClockWrapper>
-      <Clock format={'HH:mm:ss'} ticking={true} timezone={'CET'} />
-      <TimeZone>CEST</TimeZone>
+      <Clock format={'HH:mm'} ticking={true} timezone={'UTC−3'} />
+      <TimeZone>UTC−3</TimeZone>
     </ClockWrapper>
   );
 };
