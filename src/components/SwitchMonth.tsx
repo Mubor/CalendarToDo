@@ -11,15 +11,23 @@ const SwitchMonth: FC = (): JSX.Element => {
 
   return (
     <SwitchButtonsWrapper>
-      <button onClick={() => dispatch(switchPreviousMonth())}>&#8592;</button>
+      <ArrowButtons onClick={() => dispatch(switchPreviousMonth())}>&#8592;</ArrowButtons>
       <div>{dayjs(new Date(dayjs().year(), currentMonth)).format('MMMM YYYY')}</div>
-      <button onClick={() => dispatch(switchNextMonth())}>&#8594;</button>
+      <ArrowButtons onClick={() => dispatch(switchNextMonth())}>&#8594;</ArrowButtons>
     </SwitchButtonsWrapper>
   );
 };
 
 const SwitchButtonsWrapper = styled.div`
   display: flex;
+  align-items: center;
+`;
+
+const ArrowButtons = styled.button`
+  background-color: transparent;
+  border-color: transparent;
+  padding: 10px;
+  cursor: pointer;
 `;
 
 export default SwitchMonth;
