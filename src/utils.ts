@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
-import { MonthDataType } from './types';
+import { MonthDataType } from './types/types';
 
 const formatDate = (date: any): MonthDataType => {
   return {
-    dateDay: date.format('DD'),
+    dateDay: date.format('D'),
     dayWeek: date.format('MMMM'),
     dayWeekShort: date.format('ddd'),
     year: date.format('YYYY'),
