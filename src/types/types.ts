@@ -8,3 +8,7 @@ export type MonthDataType = {
 export type MonthMatrixType = {
   monthMatrix: MonthDataType[][];
 };
+
+export type ActiveType = {
+  isActive: boolean;
+};

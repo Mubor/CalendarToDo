@@ -4,7 +4,8 @@ import { getMonthMatrix } from '../utils';
 import styled from 'styled-components';
 import type { RootState } from '../state/store';
 import { useSelector } from 'react-redux';
-import SwitchMonth from '../components/SwitchMonth';
+import Header from '../components/Header/Header';
+import LeftBar from '../components/LeftBar';
 
 const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
@@ -16,16 +17,39 @@ const MainPage: FC = (): JSX.Element => {
 
   return (
     <MainPageWrapper>
-      <SwitchMonth />
-      <CalendarBoard monthMatrix={currentMonth} />
+      <Header />
+      <MainPageContainer>
+        <LeftBar />
+        <CalendarBoard monthMatrix={currentMonth} />
+      </MainPageContainer>
     </MainPageWrapper>
   );
 };
 
 const MainPageWrapper = styled.div`
+  padding: 10px 20px;
+
+  @media (${({ theme }) => theme.media.tablets}) {
+    padding: 20px 30px;
+  }
+
+  @media (${({ theme }) => theme.media.smallScreens}) {
+    padding: 40px;
+  }
+
+  @media (${({ theme }) => theme.media.desktops}) {
+    padding: 50px;
+  }
+`;
+
+const MainPageContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+
+  @media (${({ theme }) => theme.media.smallScreens}) {
+    flex-direction: row;
+  }
 `;
 
 export default MainPage;
