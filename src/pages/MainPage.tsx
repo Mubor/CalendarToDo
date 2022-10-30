@@ -19,8 +19,12 @@ const MainPage: FC = (): JSX.Element => {
     <MainPageWrapper>
       <Header />
       <MainPageContainer>
-        <LeftBar />
-        <CalendarBoard monthMatrix={currentMonth} />
+        <MainPageItemLeft>
+          <LeftBar />
+        </MainPageItemLeft>
+        <MainPageItemRight>
+          <CalendarBoard monthMatrix={currentMonth} />
+        </MainPageItemRight>
       </MainPageContainer>
     </MainPageWrapper>
   );
@@ -50,6 +54,14 @@ const MainPageContainer = styled.div`
   @media (${({ theme }) => theme.media.smallScreens}) {
     flex-direction: row;
   }
+`;
+
+const MainPageItemLeft = styled.div`
+  flex-grow: 1;
+`;
+
+const MainPageItemRight = styled.div`
+  flex-grow: 10;
 `;
 
 export default MainPage;

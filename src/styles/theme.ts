@@ -10,9 +10,10 @@ export const baseTheme: ThemeType = {
     font: {
       primary: '#EDEDED',
       secondary: '#7E7D7D',
+      error: '#cb5d5d',
     },
 
-    button: '#6B76BB',
+    button: '#3f9ae1',
   },
 
   media: {
