@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import { ThemeType } from '../types/styles';
 
-export default createGlobalStyle`
+export default createGlobalStyle<{ theme: ThemeType }>`
   * {
     box-sizing: border-box;
     margin: 0;

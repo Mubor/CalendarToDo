@@ -8,6 +8,7 @@ export interface ThemeType {
     font: {
       primary: string;
       secondary: string;
+      error: string;
     };
 
     button: string;
