@@ -18,6 +18,7 @@ export class Controller {
 		this.router = Router();
 
 		this.router.post('/signup', this.handleSignUp);
+		this.router.post('/signup', this.handleSignIn);
 		// this.router.post("/:id/pick", route(this.handlePick));
 		// this.router.get("/:id", route(this.handleGet));
 		// this.router.get("/", route(this.handleList))

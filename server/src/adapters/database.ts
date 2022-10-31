@@ -35,11 +35,20 @@ export class Database implements DatabaseRepository {
 
     async findOne(query: Partial<UserRecord | UserData>, collection:string): Promise<User|Tasks> {
         await this.client.connect();
-
         const dbObject = await this.db[collection].findOne(query);
-
         await this.client.close(); 
 
         return objectToModel(dbObject, collection);
+    }
+
+    async update(query: Partial<UserRecord | UserData>, objToUpdate: Partial<UserRecord | UserData>, collection: string): Promise<void> {
+        await this.client.connect();
+        await this.db[collection].updateOne(query, {$set: objToUpdate});
+        await this.client.close();
+    }
+    
+    async delete(query: Partial<UserRecord | UserData>, collection: string): Promise<void> {
+        await this.client.connect();
+        
     }
 }
