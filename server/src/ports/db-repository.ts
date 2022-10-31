@@ -8,5 +8,5 @@ export interface DatabaseRepository{
     save(record: UserRecord | UserData, collection: string ): Promise<void>;
     findOne(query: Partial<UserRecord | UserData>, collection: string): Promise<User|Tasks>;
     update(query: Partial<UserRecord | UserData>, objToUpdate: Partial<UserRecord | UserData>, collection: string): Promise<void>;
-    delete(query: Partial<UserRecord | UserData>, collection: string): Promise<User|Tasks>;
+    delete(query: Partial<UserRecord | UserData>, collection: string): Promise<void>;
 }

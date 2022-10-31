@@ -47,8 +47,8 @@ export class Database implements DatabaseRepository {
         await this.client.close();
     }
     
-    async delete(query: Partial<UserRecord | UserData>, collection: string): Promise<User|Tasks> {
+    async delete(query: Partial<UserRecord | UserData>, collection: string): Promise<void> {
         await this.client.connect();
-        return null
+        
     }
 }
