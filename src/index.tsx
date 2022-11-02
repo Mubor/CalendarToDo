@@ -1,6 +1,6 @@
 import React from 'react';
+import MainPage from './pages/MainPage';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './state/store';
 import GlobalStyles from './styles/global';
@@ -22,7 +22,7 @@ root.render(
           />
         </Helmet>
         <GlobalStyles />
-        <App />
+        <MainPage />
       </React.StrictMode>
     </Provider>
   </ThemeProvider>,

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { MonthDataType } from '../types/types';
+import { MonthDataType } from '../../types/types';
 import styled from 'styled-components';
 
 interface DayType {
@@ -11,7 +11,7 @@ interface DayCardProps {
   row: boolean;
 }
 
-const DayCard: FC<DayType> = ({ day, rowIndex }): JSX.Element => {
+const DayCard: FC<DayType> = ({ day, rowIndex }: DayType): JSX.Element => {
   return (
     <DayCardWrapper row={!rowIndex}>
       {!rowIndex && <Day>{day.dayWeekShort.toUpperCase()}</Day>}
