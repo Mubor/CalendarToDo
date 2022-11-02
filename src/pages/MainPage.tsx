@@ -6,6 +6,7 @@ import type { RootState } from '../state/store';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import LeftBar from '../components/LeftBar';
+import TaskForm from '../components/Forms/TaskForm';
 
 const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
@@ -23,7 +24,8 @@ const MainPage: FC = (): JSX.Element => {
           <LeftBar />
         </MainPageItemLeft>
         <MainPageItemRight>
-          <CalendarBoard monthMatrix={currentMonth} />
+          <TaskForm />
+          {/* <CalendarBoard monthMatrix={currentMonth} /> */}
         </MainPageItemRight>
       </MainPageContainer>
     </MainPageWrapper>

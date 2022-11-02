@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
-import ErrorMessage from './ErrorMessage';
-import PrimaryButton from './PrimaryButton';
+import ErrorMessage from '../ErrorMessage';
+import PrimaryButton from '../PrimaryButton';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { baseTheme } from '../styles/theme';
+import { baseTheme } from '../../styles/theme';
+import { InputField, TextAreaField } from './FormComponents/InputFields';
 
 const TaskForm: FC = (): JSX.Element => {
   const [subtasks, setSubtasks] = useState([{}]);
@@ -55,88 +56,64 @@ const TaskForm: FC = (): JSX.Element => {
         validateOnBlur
         validationSchema={validationSchema}
       >
-        {({ values, errors, touched, handleChange, handleBlur }) => (
+        {(formikData) => (
           <form>
-            <InputWrapper>
-              <Label htmlFor='taskName'>Task Name</Label>
-              <Input
-                type='text'
-                name='taskName'
-                placeholder={'Task name'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.taskName}
-              />
-              {touched.taskName && errors.taskName && <ErrorMessage message={errors.taskName} />}
-            </InputWrapper>
-            <InputWrapper>
-              <Label htmlFor='taskDescription'>Task Description</Label>
-              <TextArea
-                cols={40}
-                name='taskDescription'
-                placeholder='Text description'
-                rows={10}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.taskDescription}
-              />
-              {touched.taskDescription && errors.taskDescription && (
-                <ErrorMessage message={errors.taskDescription} />
-              )}
-            </InputWrapper>
-            <InputWrapper>
-              <Label htmlFor='startDate'>Start Date</Label>
-              <Input
-                type='date'
-                name='startDate'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.startDate}
-              />
-              {touched.startDate && errors.startDate && <ErrorMessage message={errors.startDate} />}
-            </InputWrapper>
-            <InputWrapper>
-              <Label htmlFor='endDate'>End Date</Label>
-              <Input
-                type='date'
-                name='endDate'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.endDate}
-              />
-              {touched.endDate && errors.endDate && <ErrorMessage message={errors.endDate} />}
-            </InputWrapper>
-            <InputWrapper>
-              <Label htmlFor='subtaskName'>Subtask Name</Label>
-              <Input
-                type='text'
-                name='subtaskName'
-                placeholder={'Subtask name'}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.taskName}
-              />
-              {touched.subtaskName && errors.subtaskName && (
-                <ErrorMessage message={errors.subtaskName} />
-              )}
-            </InputWrapper>
-            <InputWrapper>
-              <Label htmlFor='subtaskDate'>Subtask Date</Label>
-              <Input
-                type='date'
-                name='subtaskDate'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.taskName}
-              />
-              {touched.subtaskDate && errors.subtaskDate && (
-                <ErrorMessage message={errors.subtaskDate} />
-              )}
-            </InputWrapper>
+            <InputField
+              attr={{
+                type: 'text',
+                name: 'taskName',
+                placeholder: 'Task name',
+                labelText: 'Task Name',
+              }}
+              validationParams={formikData}
+            />
+
+            <TextAreaField
+              attr={{
+                cols: 40,
+                rows: 10,
+                name: 'taskDescription',
+                placeholder: 'Task description',
+                labelText: 'Task Description',
+              }}
+              validationParams={formikData}
+            />
+
+            <InputField
+              attr={{ type: 'date', name: 'startDate', placeholder: '', labelText: 'Start Date' }}
+              validationParams={formikData}
+            />
+
+            <InputField
+              attr={{ type: 'date', name: 'endDate', placeholder: '', labelText: 'End Date' }}
+              validationParams={formikData}
+            />
+
+            <InputField
+              attr={{
+                type: 'text',
+                name: 'subtaskName',
+                placeholder: 'Subtask name',
+                labelText: 'Subtask Name',
+              }}
+              validationParams={formikData}
+            />
+
+            <InputField
+              attr={{
+                type: 'date',
+                name: 'subtaskDate',
+                placeholder: '',
+                labelText: 'Subtask Date',
+              }}
+              validationParams={formikData}
+            />
+
             <AddButtonWrapper type={'button'} onClick={addSubtask}>
               <AddCircleOutlineIcon sx={{ fill: baseTheme.colors.bg.secondary }} />
               <AddButtonTitle>Add your subtask</AddButtonTitle>
             </AddButtonWrapper>
+
             <SubmitButtonWrapper>
               <PrimaryButton text={'Submit'} />
             </SubmitButtonWrapper>
