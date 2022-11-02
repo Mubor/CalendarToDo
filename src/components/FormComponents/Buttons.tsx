@@ -16,7 +16,7 @@ export const PrimaryButton: FC<PrimaryButtonType> = ({ text }): JSX.Element => {
 export const SubmitButton: FC<PrimaryButtonType> = ({ text }): JSX.Element => {
   return (
     <PrimaryButtonWrapper>
-      <Submit type='submit' value={text}></Submit>
+      <Submit type='submit' value={text} />
     </PrimaryButtonWrapper>
   );
 };
@@ -24,7 +24,7 @@ export const SubmitButton: FC<PrimaryButtonType> = ({ text }): JSX.Element => {
 const PrimaryButtonContainer = styled.button`
   border-radius: 20px;
   font-size: 16px;
-  border: ${({ theme }) => theme.colors.button} 2px solid;
+  border: ${({ theme }) => theme.colors.button.primary} 2px solid;
   cursor: pointer;
   padding: 10px 30px;
 `;
@@ -32,7 +32,7 @@ const PrimaryButtonContainer = styled.button`
 const Submit = styled.input`
   border-radius: 20px;
   font-size: 16px;
-  border: ${({ theme }) => theme.colors.button} 2px solid;
+  border: ${({ theme }) => theme.colors.button.primary} 2px solid;
   cursor: pointer;
   padding: 10px 30px;
 `;
@@ -43,7 +43,8 @@ const PrimaryButtonWrapper = styled.div`
   }
 
   &:hover > * {
-    background-color: ${({ theme }) => theme.colors.button};
-    transition: background-color 0.5s;
+    background-color: ${({ theme }) => theme.colors.button.primary};
+    color: ${({ theme }) => theme.colors.font.secondary};
+    transition: background-color, color 0.5s;
   }
 `;

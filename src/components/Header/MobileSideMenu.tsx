@@ -26,7 +26,7 @@ const MobileSideMenuContainer = styled.nav<ActiveType>`
   padding-top: 80px;
   align-items: center;
   gap: 20px;
-  background-color: ${({ theme }) => theme.colors.bg.secondary}
+  background-color: ${({ theme }) => theme.colors.border.secondary}
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transform: ${({ isActive }) => (isActive ? 'translateX(0)' : 'translateX(-100%)')};
 `;

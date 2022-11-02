@@ -39,7 +39,7 @@ const HeaderContainer = styled.div`
     gap: 0;
     justify-content: space-between;
     width: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
   }
 `;
 
