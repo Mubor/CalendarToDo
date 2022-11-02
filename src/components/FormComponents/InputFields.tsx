@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import ErrorMessage from '../ErrorMessage';
@@ -67,6 +67,7 @@ const Label = styled.label`
   padding-left: 4px;
   font-weight: 300;
   padding-top: 20px;
+  color: ${({ theme }) => theme.colors.font.secondary};
 `;
 
 const Input = styled.input`
@@ -74,14 +75,13 @@ const Input = styled.input`
     filter: invert(1);
   }
 
-  color: ${({ theme }) => theme.colors.font.secondary};
   padding: 10px;
-  border: ${({ theme }) => theme.colors.bg.secondary} 1px solid;
+  border: ${({ theme }) => theme.colors.border.primary} 1px solid;
   border-radius: 10px;
 `;
 
 const TextArea = styled.textarea`
   padding: 10px;
   border-radius: 10px;
-  border: ${({ theme }) => theme.colors.bg.secondary} 1px solid;
+  border: ${({ theme }) => theme.colors.border.primary} 1px solid;
 `;

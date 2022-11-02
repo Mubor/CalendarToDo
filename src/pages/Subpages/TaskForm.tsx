@@ -113,7 +113,7 @@ const TaskForm: FC = (): JSX.Element => {
             />
 
             <AddButtonWrapper type={'button'} onClick={addSubtask}>
-              <AddCircleOutlineIcon sx={{ fill: baseTheme.colors.bg.secondary }} />
+              <AddCircleOutlineIcon sx={{ fill: baseTheme.colors.font.primary }} />
               <AddButtonTitle>Add your subtask</AddButtonTitle>
             </AddButtonWrapper>
 
@@ -149,6 +149,7 @@ const FormName = styled.p`
   font-size: 20px;
   text-align: center;
   padding: 20px 0 0;
+  color: ${({ theme }) => theme.colors.font.secondary};
 
   @media (${({ theme }) => theme.media.smallScreens}) {
     padding: 0;
@@ -171,7 +172,7 @@ const AddButtonWrapper = styled.button`
 `;
 
 const AddButtonTitle = styled.p`
-  color: ${({ theme }) => theme.colors.font.secondary};
+  //color: ${({ theme }) => theme.colors.font.secondary};
 `;
 
 export default TaskForm;
