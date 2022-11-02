@@ -8,10 +8,19 @@ export interface ThemeType {
     font: {
       primary: string;
       secondary: string;
+      brightLight: string;
       error: string;
     };
 
-    button: string;
+    button: {
+      primary: string;
+    };
+
+    border: {
+      primary: string;
+    };
+
+    accept: string;
   };
 
   media: {
