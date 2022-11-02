@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
-import ErrorMessage from '../ErrorMessage';
-import PrimaryButton from '../PrimaryButton';
+import { SubmitButton } from './FormComponents/Buttons';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { baseTheme } from '../../styles/theme';
 import { InputField, TextAreaField } from './FormComponents/InputFields';
@@ -38,6 +37,10 @@ const TaskForm: FC = (): JSX.Element => {
       .min(Yup.ref('startDate'), 'End date must be later then start date'),
   });
 
+  const preventSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <FormContainer>
       <FormName>Create the task</FormName>
@@ -51,13 +54,13 @@ const TaskForm: FC = (): JSX.Element => {
           subtaskDate: '',
         }}
         onSubmit={() => {
-          console.log('Submit');
+          console.log('submit');
         }}
         validateOnBlur
         validationSchema={validationSchema}
       >
         {(formikData) => (
-          <form>
+          <form onSubmit={preventSubmit}>
             <InputField
               attr={{
                 type: 'text',
@@ -115,7 +118,7 @@ const TaskForm: FC = (): JSX.Element => {
             </AddButtonWrapper>
 
             <SubmitButtonWrapper>
-              <PrimaryButton text={'Submit'} />
+              <SubmitButton text={'Create'} />
             </SubmitButtonWrapper>
           </form>
         )}
@@ -150,36 +153,6 @@ const FormName = styled.p`
   @media (${({ theme }) => theme.media.smallScreens}) {
     padding: 0;
   }
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 10;
-`;
-
-const Label = styled.label`
-  padding-bottom: 6px;
-  padding-left: 4px;
-  font-weight: 300;
-  padding-top: 20px;
-`;
-
-const Input = styled.input`
-  ::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-  }
-
-  color: ${({ theme }) => theme.colors.font.secondary};
-  padding: 10px;
-  border: ${({ theme }) => theme.colors.bg.secondary} 1px solid;
-  border-radius: 10px;
-`;
-
-const TextArea = styled.textarea`
-  padding: 10px;
-  border-radius: 10px;
-  border: ${({ theme }) => theme.colors.bg.secondary} 1px solid;
 `;
 
 const SubmitButtonWrapper = styled.div`

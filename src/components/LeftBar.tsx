@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import SwitchMonth from './SwitchMonth';
-import PrimaryButton from './PrimaryButton';
+import { PrimaryButton } from './Forms/FormComponents/Buttons';
 
 const LeftBar: FC = (): JSX.Element => {
   return (

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import PrimaryButton from '../PrimaryButton';
+import { PrimaryButton } from '../Forms/FormComponents/Buttons';
 import { ActiveType } from '../../types/types';
 
 const MobileSideMenu: FC<ActiveType> = ({ isActive }): JSX.Element => {
