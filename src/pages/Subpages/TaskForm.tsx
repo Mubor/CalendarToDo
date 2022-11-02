@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
-import { SubmitButton } from './FormComponents/Buttons';
+import { SubmitButton } from '../../components/FormComponents/Buttons';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { baseTheme } from '../../styles/theme';
-import { InputField, TextAreaField } from './FormComponents/InputFields';
+import { InputField, TextAreaField } from '../../components/FormComponents/InputFields';
 
 const TaskForm: FC = (): JSX.Element => {
   const [subtasks, setSubtasks] = useState([{}]);

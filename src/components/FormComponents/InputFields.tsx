@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
-import ErrorMessage from '../../ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
 type InputAttributes = {
   type?: string;

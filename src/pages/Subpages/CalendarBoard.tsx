@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import DayCard from './DayCard';
-import { MonthMatrixType, MonthDataType } from '../types/types';
+import DayCard from '../../components/CalendarComponents/DayCard';
+import { MonthMatrixType, MonthDataType } from '../../types/types';
 import styled from 'styled-components';
-import SwitchMonth from './SwitchMonth';
+import SwitchMonth from '../../components/CalendarComponents/SwitchMonth';
 
 const CalendarBoard: FC<MonthMatrixType> = ({ monthMatrix }): JSX.Element => {
   return (

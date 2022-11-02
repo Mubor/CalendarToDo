@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { MonthDataType } from '../types/types';
+import { MonthDataType } from '../../types/types';
 import styled from 'styled-components';
 
 interface DayType {
