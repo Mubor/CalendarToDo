@@ -8,6 +8,7 @@ import Header from '../components/Header/Header';
 import LeftBar from '../components/LeftBar';
 import TaskForm from './Subpages/TaskForm';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Tasks from './Subpages/Tasks';
 
 const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
@@ -30,6 +31,7 @@ const MainPage: FC = (): JSX.Element => {
             <Routes>
               <Route path='/calendar' element={<CalendarBoard monthMatrix={currentMonth} />} />
               <Route path='/creation' element={<TaskForm />} />
+              <Route path='/tasks' element={<Tasks />} />
             </Routes>
           </MainPageItemRight>
         </BrowserRouter>
@@ -69,7 +71,15 @@ const MainPageItemLeft = styled.div`
 `;
 
 const MainPageItemRight = styled.div`
-  flex-grow: 10;
+  flex-grow: 30;
+
+  @media (${({ theme }) => theme.media.smallScreens}) {
+    width: 70%;
+  }
+
+  @media (${({ theme }) => theme.media.desktops}) {
+    width: 80%;
+  }
 `;
 
 export default MainPage;
