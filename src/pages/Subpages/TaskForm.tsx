@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import dayjs from 'dayjs';
 import { SubmitButton } from '../../components/FormComponents/Buttons';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import { baseTheme } from '../../styles/theme';
+import { baseTheme } from '../../domain/styles/theme';
 import { InputField, TextAreaField } from '../../components/FormComponents/InputFields';
 
 const TaskForm: FC = (): JSX.Element => {

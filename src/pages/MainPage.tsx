@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import CalendarBoard from './Subpages/CalendarBoard';
 import { getMonthMatrix } from '../utils/utils';
 import styled from 'styled-components';
-import type { RootState } from '../state/store';
+import type { RootState } from '../domain/state/store';
 import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import LeftBar from '../components/LeftBar';
@@ -11,7 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Tasks from './Subpages/Tasks';
 import { routes } from '../utils/constants';
 
-const MainPage: FC = (): JSX.Element => {
+export const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
   const currentMonthIndex = useSelector((state: RootState) => state.currentMonth);
 
@@ -23,22 +23,17 @@ const MainPage: FC = (): JSX.Element => {
     <MainPageWrapper>
       <Header />
       <MainPageContainer>
-        <BrowserRouter>
-          <MainPageItemLeft>
-            <LeftBar />
-          </MainPageItemLeft>
+        <MainPageItemLeft>
+          <LeftBar />
+        </MainPageItemLeft>
 
-          <MainPageItemRight>
-            <Routes>
-              <Route
-                path={routes.calendar}
-                element={<CalendarBoard monthMatrix={currentMonth} />}
-              />
-              <Route path={routes.tasks} element={<Tasks />} />
-              <Route path={routes.creation} element={<TaskForm />} />
-            </Routes>
-          </MainPageItemRight>
-        </BrowserRouter>
+        <MainPageItemRight>
+          <Routes>
+            <Route index element={<CalendarBoard monthMatrix={currentMonth} />} />
+            <Route path='calendar' element={<CalendarBoard monthMatrix={currentMonth} />} />
+            <Route path='creation' element={<TaskForm />} />
+          </Routes>
+        </MainPageItemRight>
       </MainPageContainer>
     </MainPageWrapper>
   );

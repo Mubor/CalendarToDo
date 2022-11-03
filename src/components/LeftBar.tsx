@@ -5,7 +5,7 @@ import SwitchMonth from './CalendarComponents/SwitchMonth';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { baseTheme } from '../styles/theme';
+import { baseTheme } from '../domain/styles/theme';
 import { routes } from '../utils/constants';
 
 const LeftBar: FC = (): JSX.Element => {
@@ -14,24 +14,9 @@ const LeftBar: FC = (): JSX.Element => {
   return (
     <LeftBarContainer>
       <SwitchMonth />
-      <NavLink to={routes.calendar} isCurrentRoute={pathname === routes.calendar}>
-        <CalendarMonthIcon
-          sx={{ fill: pathname === routes.calendar ? baseTheme.colors.font.secondary : '' }}
-        />
-        Calendar
-      </NavLink>
-      <NavLink to={routes.tasks} isCurrentRoute={pathname === routes.tasks}>
-        <AssignmentIcon
-          sx={{ fill: pathname === routes.tasks ? baseTheme.colors.font.secondary : '' }}
-        />
-        Tasks
-      </NavLink>
-      <NavLink to={routes.creation} isCurrentRoute={pathname === routes.creation}>
-        <AddCircleIcon
-          sx={{ fill: pathname === routes.creation ? baseTheme.colors.font.secondary : '' }}
-        />
-        Create new task
-      </NavLink>
+      <Link to='calendar'>Calendar</Link>
+      <Link to='tasks'>Tasks</Link>
+      <Link to='creation'>Create</Link>
     </LeftBarContainer>
   );
 };

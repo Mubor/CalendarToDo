@@ -1,12 +1,13 @@
 import React from 'react';
-import MainPage from './pages/MainPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './state/store';
-import GlobalStyles from './styles/global';
+import { store } from './domain/state/store';
+import GlobalStyles from './domain/styles/global';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from 'styled-components';
-import { baseTheme } from './styles/theme';
+import { baseTheme } from './domain/styles/theme';
+import { App } from './app/app';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
@@ -22,7 +23,11 @@ root.render(
           />
         </Helmet>
         <GlobalStyles />
-        <MainPage />
+        <BrowserRouter>
+          <Routes>
+            <Route path='*' element={<App />} />
+          </Routes>
+        </BrowserRouter>
       </React.StrictMode>
     </Provider>
   </ThemeProvider>,
