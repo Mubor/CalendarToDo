@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import DayCard from '../../components/CalendarComponents/DayCard';
-import { MonthMatrixType, MonthDataType } from '../../types/types';
+import { MonthMatrixType, MonthDataType } from '../../domain/types/types';
 import styled from 'styled-components';
 import SwitchMonth from '../../components/CalendarComponents/SwitchMonth';
 

@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../state/store';
-import { switchPreviousMonth, switchNextMonth } from '../../state/switchSlice';
+import { RootState } from '../../domain/state/store';
+import { switchPreviousMonth, switchNextMonth } from '../../domain/state/switchSlice';
 
 const SwitchMonth: FC = (): JSX.Element => {
   const currentMonth = useSelector((state: RootState) => state.currentMonth);
