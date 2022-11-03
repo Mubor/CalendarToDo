@@ -5,7 +5,7 @@ import SwitchMonth from './CalendarComponents/SwitchMonth';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { baseTheme } from '../styles/theme';
+import { baseTheme } from '../domain/styles/theme';
 import { routes } from '../utils/constants';
 
 const LeftBar: FC = (): JSX.Element => {
