@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { MonthDataType } from '../types/types';
+import { MonthDataType } from '../domain/types/types';
 
 const formatDate = (date: any): MonthDataType => {
   return {

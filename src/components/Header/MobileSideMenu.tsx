@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { PrimaryButton } from '../FormComponents/Buttons';
-import { ActiveType } from '../../types/types';
+import { ActiveType } from '../../domain/types/types';
 
 const MobileSideMenu: FC<ActiveType> = ({ isActive }): JSX.Element => {
   return (

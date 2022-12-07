@@ -1,5 +1,6 @@
 import { UserData, UserRecord } from '../domain/types.js';
 import { Tasks } from '../domain/models/tasks.js';
+import { User } from '../domain/models/user.js';
 
 import { DatabaseRepository } from '../ports/db-repository.js';
 
@@ -7,18 +8,18 @@ import { DatabaseRepository } from '../ports/db-repository.js';
 export class SignInCommand {
 	constructor(private readonly dbRepository: DatabaseRepository) {}
 
-	async execute(user: UserData): Promise<void|Error> {
+	async execute(user: UserData): Promise<UserRecord|Error> {
+		
+		const record =  await this.dbRepository.findOne(user, 'users')
 
-		// const record =  await this.dbRepository.findOne({login: user.login, password: user.password}, 'users')
+		if(record){
+			const tasksRecord = <Tasks>await this.dbRepository.findOne({login: user.login}, 'tasks');
 
-		// if(record){
-		// 	const {login, tasks} = await this.dbRepository.findOne({login: user.login}, 'tasks');
-			
-		// 	return;
-		// }
-		// else {
-		// 	return new Error('Login or password wa s incorrect');
-		// }
+			return Tasks.getRecord(tasksRecord);
+		}
+		else {
+			return new Error('Login or password wa s incorrect');
+		}
 
 	}
 }

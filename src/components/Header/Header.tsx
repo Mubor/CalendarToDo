@@ -3,10 +3,14 @@ import styled from 'styled-components';
 import LiveTimeClock from './LiveTimeClock';
 import BurgerButton from './BurgerButton';
 import MobileSideMenu from './MobileSideMenu';
+import type { RootState } from '../../domain/state/store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Header: FC = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const user = useSelector((state: RootState) => state.user.currentUser);
+  const dispatch = useDispatch();
+  console.log(user);
   const handleClick = () => setIsMenuOpen(!isMenuOpen);
   return (
     <HeaderWrapper>
@@ -15,7 +19,7 @@ const Header: FC = (): JSX.Element => {
       <HeaderContainer>
         <ProjectName>TaskCalendar</ProjectName>
         <AdditionalDataWrapper>
-          <div>Username</div>
+          <div>{user.login}</div>
           <LiveTimeClock />
         </AdditionalDataWrapper>
       </HeaderContainer>

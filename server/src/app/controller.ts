@@ -6,6 +6,8 @@ import { DatabaseRepository } from '../ports/db-repository.js';
 // import { User } from '../domain/models/user';
 
 import { SignUpCommand } from '../commands/SignUpCommand.js';
+import { SignInCommand } from '../commands/SignInCommand.js';
+import { json } from 'stream/consumers';
 
 
 export class Controller {
@@ -17,8 +19,8 @@ export class Controller {
 
 		this.router = Router();
 
-		this.router.post('/signup', this.handleSignUp);
-		this.router.post('/signup', this.handleSignIn);
+		this.router.post('/signUp', this.handleSignUp);
+		this.router.post('/signIn', this.handleSignIn);
 		// this.router.post("/:id/pick", route(this.handlePick));
 		// this.router.get("/:id", route(this.handleGet));
 		// this.router.get("/", route(this.handleList))
@@ -31,11 +33,14 @@ export class Controller {
 	}
 
 	handleSignUp = async (req: Request, res: Response): Promise<void> => {
+		console.log('signup started')
 		const body = req.body;
-		const request = await new SignUpCommand(this.dbRepository).execute(body);
-	
-        if(request instanceof Error) {
-			res.json(request.message)
+		const result = await new SignUpCommand(this.dbRepository).execute(body);
+        if(result instanceof Error) {
+			res.json({
+				status: 400,
+				message: result.message
+			});
 		}
 		else {
 			res.json(
@@ -43,17 +48,37 @@ export class Controller {
 					status:200,
 					message:'user created',
 					body,
+					record: result
+					
 				});
 		}
 	}
 
 	handleSignIn = async(req: Request, res: Response) : Promise<void> => {
-		res.json(
-			{
-				status:200,
-				message:'user created',
-			
+		const body = req.body;
+		const result = await new SignInCommand(this.dbRepository).execute(body);
+
+        if(result instanceof Error) {
+			res.json({
+				status: 400,
+				message: result.message
 			});
+		}
+		else if (result === null) {
+			res.json({
+				status: 404,
+				message: 'User is not found'
+			});
+		}
+		else {
+			res.json(
+				{
+					status:200,
+					message:'user created',
+					body,
+					record: result,
+				});
+		}
 	}
 
 

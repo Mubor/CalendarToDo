@@ -1,8 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
-import switchReducer from './switchSlice';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+
+// import switchR from './switchSlice';
+import switchSlice from './switchSlice';
+import user from './user';
+
+const rootReducer = combineReducers({
+  switch: switchSlice,
+  user: user,
+});
 
 export const store = configureStore({
-  reducer: switchReducer,
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -6,7 +6,7 @@ import { RootState } from '../../domain/state/store';
 import { switchPreviousMonth, switchNextMonth } from '../../domain/state/switchSlice';
 
 const SwitchMonth: FC = (): JSX.Element => {
-  const currentMonth = useSelector((state: RootState) => state.currentMonth);
+  const currentMonth = useSelector((state: RootState) => state.switch.currentMonth);
   const dispatch = useDispatch();
 
   return (
@@ -15,7 +15,9 @@ const SwitchMonth: FC = (): JSX.Element => {
       <CurrentMonth>
         {dayjs(new Date(dayjs().year(), currentMonth)).format('MMMM YYYY')}
       </CurrentMonth>
-      <ArrowButtons onClick={() => dispatch(switchNextMonth())}>&#8594;</ArrowButtons>
+      <ArrowButtons onClick={() => dispatch(switchNextMonth({ type: '', payload: 1 }))}>
+        &#8594;
+      </ArrowButtons>
     </SwitchButtonsWrapper>
   );
 };
