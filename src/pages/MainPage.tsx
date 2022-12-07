@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux';
 import Header from '../components/Header/Header';
 import LeftBar from '../components/LeftBar';
 import TaskForm from './Subpages/TaskForm';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Tasks from './Subpages/Tasks';
 import { routes } from '../utils/constants';
 
 export const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
-  const currentMonthIndex = useSelector((state: RootState) => state.currentMonth);
+  const currentMonthIndex = useSelector((state: RootState) => state.switch.currentMonth);
 
   useEffect(() => {
     setCurrentMonth(getMonthMatrix(currentMonthIndex));

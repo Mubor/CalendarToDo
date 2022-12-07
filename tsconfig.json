@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +21,7 @@
   },
   "include": [
     "./server/src"
-, "server/adapters"  ],
+],
   "exclude": [
     "node_modules",
     "server/dist",
@@ -29,5 +29,6 @@
     "public",
     "src"
   ],
-  "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  // "compileOnSave": true,
 }

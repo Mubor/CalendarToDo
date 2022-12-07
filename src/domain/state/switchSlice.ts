@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import dayjs from 'dayjs';
 
 export interface SwitchState {
@@ -13,8 +14,10 @@ export const switchSlice = createSlice({
   name: 'switch',
   initialState,
   reducers: {
-    switchNextMonth: (state) => {
-      state.currentMonth += 1;
+    switchNextMonth: (state, action) => {
+      console.log(action);
+      state.currentMonth += action.payload.payload;
+      console.log(state.currentMonth);
     },
     switchPreviousMonth: (state) => {
       state.currentMonth -= 1;
@@ -24,4 +27,6 @@ export const switchSlice = createSlice({
 
 export const { switchNextMonth, switchPreviousMonth } = switchSlice.actions;
 
-export default switchSlice.reducer;
+const switchReducer = switchSlice.reducer;
+
+export default switchReducer;

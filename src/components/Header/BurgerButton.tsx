@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { ActiveType } from '../../types/types';
+import { ActiveType } from '../../domain/types/types';
 
 type BurgerButtonType = {
   isActive: boolean;

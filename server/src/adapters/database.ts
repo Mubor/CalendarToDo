@@ -5,7 +5,7 @@ import { UserRecord, UserData, DBCollection } from '../domain/types.js';
 import { MongoClient} from 'mongodb';
 
 const objectToModel = (data, collection: string) : User|Tasks => {
-
+    console.log('this is what is ' + data);
     const {_id, ...record} = data
 
     const entity = collection === 'users' ? User.toModel(record) : Tasks.toModel(record);
@@ -33,12 +33,11 @@ export class Database implements DatabaseRepository {
         await this.client.close();
     }
 
-    async findOne(query: Partial<UserRecord | UserData>, collection:string): Promise<User|Tasks> {
+    async findOne(query: Partial<UserRecord | UserData>, collection:string): Promise<User|Tasks|null> {
         await this.client.connect();
         const dbObject = await this.db[collection].findOne(query);
         await this.client.close(); 
-
-        return objectToModel(dbObject, collection);
+        return dbObject ? objectToModel(dbObject, collection) : null;
     }
 
     async update(query: Partial<UserRecord | UserData>, objToUpdate: Partial<UserRecord | UserData>, collection: string): Promise<void> {
