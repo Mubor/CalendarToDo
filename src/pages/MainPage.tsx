@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import CalendarBoard from './Subpages/CalendarBoard';
-import { getMonthMatrix } from '../utils/utils';
+import { getMonthMatrix } from '../utils/calendarMatrix';
 import styled from 'styled-components';
 import type { RootState } from '../domain/state/store';
 import { useSelector } from 'react-redux';

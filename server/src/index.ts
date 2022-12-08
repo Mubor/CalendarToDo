@@ -20,6 +20,11 @@ app.get('/', (req:Request, res:Response) => {
     res.sendFile(process.cwd() + '/client/index.html');
 });
 
+// react-router refresh page not found fix
+app.get('/*', (req:Request, res:Response) => {
+    res.sendFile(process.cwd() + '/client/index.html');
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is working on port ${PORT}... Шо ты, голова?`);

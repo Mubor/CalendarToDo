@@ -4,13 +4,12 @@ import LiveTimeClock from './LiveTimeClock';
 import BurgerButton from './BurgerButton';
 import MobileSideMenu from './MobileSideMenu';
 import type { RootState } from '../../domain/state/store';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const Header: FC = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = useSelector((state: RootState) => state.user.currentUser);
-  const dispatch = useDispatch();
-  console.log(user);
+
   const handleClick = () => setIsMenuOpen(!isMenuOpen);
   return (
     <HeaderWrapper>
