@@ -42,6 +42,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ###`Порядок запуска сервера:`
 
 ###`npm run build` (билд реакта если были изменения)
+
 ###`npm run type` (билд серверного typescript если были изменения в серверных файлов)
+
 ###`npm run server` (запуск сервера)
+
 переход по ссылке http://localhost:3030 (появляется в терминале VSCode
