@@ -1,7 +1,6 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import type { RootState } from '../domain/state/store';
-import { useSelector } from 'react-redux';
+
 import { Route, Routes } from 'react-router-dom';
 import { SignIn } from './Subpages/SignIn';
 import { SignUp } from './Subpages/SignUp';

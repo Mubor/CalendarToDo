@@ -32,7 +32,6 @@ export class Controller {
 	}
 
 	handleSignUp = async (req: Request, res: Response): Promise<void> => {
-		console.log('signup started')
 		const body = req.body;
 		const result = await new SignUpCommand(this.dbRepository).execute(body);
         if(result instanceof Error) {
@@ -48,7 +47,6 @@ export class Controller {
 					message:'user created',
 					body,
 					record: result
-					
 				});
 		}
 	}
@@ -61,12 +59,6 @@ export class Controller {
 			res.json({
 				status: 400,
 				message: result.message
-			});
-		}
-		else if (result === null) {
-			res.json({
-				status: 404,
-				message: 'User is not found'
 			});
 		}
 		else {
