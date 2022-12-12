@@ -7,38 +7,80 @@ import { SubmitButton } from '../../components/FormComponents/Buttons';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { baseTheme } from '../../domain/styles/theme';
 import { InputField, TextAreaField } from '../../components/FormComponents/InputFields';
+import { setData } from '../../domain/state/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../domain/state/store';
+import { UserRecord } from '../../types/user';
+import { useNavigate } from 'react-router-dom';
+import { json } from 'stream/consumers';
+import axios from 'axios';
 
 const TaskForm: FC = (): JSX.Element => {
-  const [subtasks, setSubtasks] = useState([{}]);
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user.currentUser);
+  const [subtasks, setSubtasks] = useState({});
+  const navigate = useNavigate();
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required('This is a required field'),
+    description: Yup.string(),
+    start_date: Yup.date()
+      .min(dayjs().startOf('day'), 'Start date could not be in the past')
+      .required('This is a required field'),
+    // end_date: Yup.date()
+    //   .required('This is a required field')
+    //   .min(Yup.ref('startDate'), 'End date must be later then start date'),
+    subtaskName: Yup.string().required('This is a required field'),
+    subtaskDate: Yup.date().required('This is a required field'),
+    // .min(Yup.ref('startDate'), 'End date must be later then start date'),
+  });
 
   const addSubtask = () => {
     console.log(subtasks);
-    setSubtasks([
-      ...subtasks,
-      {
-        subtaskName: '',
-        subtaskDate: '',
-      },
-    ]);
+
+    subtasks[Date.now().toString()] = {
+      subtaskName: '',
+      subtaskDate: '',
+    };
+    setSubtasks(subtasks);
   };
 
-  const validationSchema = Yup.object({
-    taskName: Yup.string().required('This is a required field'),
-    taskDescription: Yup.string(),
-    startDate: Yup.date()
-      .min(dayjs().startOf('day'), 'Start date could not be in the past')
-      .required('This is a required field'),
-    endDate: Yup.date()
-      .required('This is a required field')
-      .min(Yup.ref('startDate'), 'End date must be later then start date'),
-    subtaskName: Yup.string().required('This is a required field'),
-    subtaskDate: Yup.date()
-      .required('This is a required field')
-      .min(Yup.ref('startDate'), 'End date must be later then start date'),
-  });
+  const addTask = (inputtedValues) => {
+    const { name, description, end_date, start_date } = inputtedValues;
+    const { login, tasks } = user;
 
-  const preventSubmit = (e) => {
-    e.preventDefault();
+    const newTasks = {
+      ...tasks,
+      [Date.now().toString()]: {
+        name,
+        description,
+        end_date,
+        start_date,
+        status: 'in progress',
+        created_at: new Date(),
+        subtasks: subtasks,
+      },
+    };
+
+    const userData = {
+      login,
+      tasks: newTasks,
+    };
+
+    dispatch(setData({ payload: userData }));
+
+    return userData;
+  };
+
+  const createFormSubmit = async (values) => {
+    const updatedUser = addTask(values);
+    const { data: response } = await axios.post('/update', updatedUser);
+
+    if (response.status === 200) {
+      navigate('/main');
+    } else {
+      alert(response.message);
+    }
   };
 
   return (
@@ -46,25 +88,28 @@ const TaskForm: FC = (): JSX.Element => {
       <FormName>Create the task</FormName>
       <Formik
         initialValues={{
-          taskName: '',
-          taskDescription: '',
-          startDate: '',
-          endDate: '',
+          name: '',
+          description: '',
+          start_date: '',
+          end_date: '',
           subtaskName: '',
           subtaskDate: '',
         }}
-        onSubmit={() => {
-          console.log('submit');
-        }}
+        onSubmit={createFormSubmit}
         validateOnBlur
         validationSchema={validationSchema}
       >
         {(formikData) => (
-          <form onSubmit={preventSubmit}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              formikData.handleSubmit();
+            }}
+          >
             <InputField
               attr={{
                 type: 'text',
-                name: 'taskName',
+                name: 'name',
                 placeholder: 'Task name',
                 labelText: 'Task Name',
               }}
@@ -75,7 +120,7 @@ const TaskForm: FC = (): JSX.Element => {
               attr={{
                 cols: 40,
                 rows: 10,
-                name: 'taskDescription',
+                name: 'description',
                 placeholder: 'Task description',
                 labelText: 'Task Description',
               }}
@@ -83,12 +128,12 @@ const TaskForm: FC = (): JSX.Element => {
             />
 
             <InputField
-              attr={{ type: 'date', name: 'startDate', placeholder: '', labelText: 'Start Date' }}
+              attr={{ type: 'date', name: 'start_date', placeholder: '', labelText: 'Start Date' }}
               validationParams={formikData}
             />
 
             <InputField
-              attr={{ type: 'date', name: 'endDate', placeholder: '', labelText: 'End Date' }}
+              attr={{ type: 'date', name: 'end_date', placeholder: '', labelText: 'End Date' }}
               validationParams={formikData}
             />
 

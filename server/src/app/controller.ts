@@ -1,12 +1,10 @@
 import { Request, Response, Router } from 'express';
 
 import { DatabaseRepository } from '../ports/db-repository.js';
-// import { UserRecord, UserData } from '../domain/types';
-// import { Tasks } from '../domain/models/tasks';
-// import { User } from '../domain/models/user';
 
 import { SignUpCommand } from '../commands/SignUpCommand.js';
 import { SignInCommand } from '../commands/SignInCommand.js';
+import { UpdateCommand } from '../commands/UpdateCommand.js';
 
 
 export class Controller {
@@ -20,11 +18,7 @@ export class Controller {
 
 		this.router.post('/signUp', this.handleSignUp);
 		this.router.post('/signIn', this.handleSignIn);
-		// this.router.post("/:id/pick", route(this.handlePick));
-		// this.router.get("/:id", route(this.handleGet));
-		// this.router.get("/", route(this.handleList))
-		// this.router.delete("/:id", route(this.handleDelete));
-		// this.router.post("/:id/complete", route(this.handleComplete));
+		this.router.post('/update', this.handleUpdate);
 	}
 
 	process() {
@@ -48,10 +42,10 @@ export class Controller {
 					body,
 					record: result
 				});
+			}
 		}
-	}
-
-	handleSignIn = async(req: Request, res: Response) : Promise<void> => {
+		
+		handleSignIn = async(req: Request, res: Response) : Promise<void> => {
 		const body = req.body;
 		const result = await new SignInCommand(this.dbRepository).execute(body);
 
@@ -65,14 +59,36 @@ export class Controller {
 			res.json(
 				{
 					status:200,
-					message:'user created',
+					message:'successfully signed in',
+					body,
+					record: result,
+				});
+			}
+		}
+
+	handleUpdate = async(req: Request, res: Response):Promise<void> => {
+		const body = req.body;
+		const result = await new UpdateCommand(this.dbRepository).execute(body);
+		console.log(body);
+		
+        if(result instanceof Error) {
+			res.json({
+				status: 400,
+				message: result.message
+			});
+		}
+		else {
+			res.json(
+				{
+					status:200,
+					message:'updated',
 					body,
 					record: result,
 				});
 		}
 	}
 
-
+	
 	// handleGet = async (req: Request<GetParams, ExpressSuccessResponse<AppointmentRecord>>): Promise<AppointmentRecord> => {
 	// 	const { id } = req.params;
 

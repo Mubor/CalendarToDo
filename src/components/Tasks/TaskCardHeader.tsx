@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
-import { baseTheme } from '../../styles/theme';
+import { baseTheme } from '../../domain/styles/theme';
 
 const TaskCardHeader: FC = (): JSX.Element => {
   return (

@@ -5,7 +5,7 @@ import { UserRecord, UserData, DBCollection } from '../domain/types.js';
 import { MongoClient} from 'mongodb';
 
 const objectToModel = (data, collection: string) : User|Tasks => {
-    console.log('this is what is ' + data);
+
     const {_id, ...record} = data
 
     const entity = collection === 'users' ? User.toModel(record) : Tasks.toModel(record);

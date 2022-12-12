@@ -9,7 +9,6 @@ import LeftBar from '../components/LeftBar';
 import TaskForm from './Subpages/TaskForm';
 import { Route, Routes } from 'react-router-dom';
 import Tasks from './Subpages/Tasks';
-import { routes } from '../utils/constants';
 
 export const MainPage: FC = (): JSX.Element => {
   const [currentMonth, setCurrentMonth] = useState(getMonthMatrix());
@@ -31,6 +30,7 @@ export const MainPage: FC = (): JSX.Element => {
           <Routes>
             <Route index element={<CalendarBoard monthMatrix={currentMonth} />} />
             <Route path='calendar' element={<CalendarBoard monthMatrix={currentMonth} />} />
+            <Route path='tasks' element={<Tasks />} />
             <Route path='creation' element={<TaskForm />} />
           </Routes>
         </MainPageItemRight>
