@@ -14,6 +14,7 @@ import { UserRecord } from '../../types/user';
 import { useNavigate } from 'react-router-dom';
 import { json } from 'stream/consumers';
 import axios from 'axios';
+import { date } from 'yup/lib/locale';
 
 const TaskForm: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -45,6 +46,19 @@ const TaskForm: FC = (): JSX.Element => {
     setSubtasks(subtasks);
   };
 
+  const getStatus = (startDate) => {
+    if (Date.now() < Date.parse(startDate)) {
+      return 'planned';
+    }
+
+    return 'current';
+  };
+
+  const roundDate = (date) => {
+    const _date = new Date(date);
+    return new Date(_date.getFullYear(), _date.getMonth(), _date.getDate());
+  };
+
   const addTask = (inputtedValues) => {
     const { name, description, end_date, start_date } = inputtedValues;
     const { login, tasks } = user;
@@ -54,9 +68,9 @@ const TaskForm: FC = (): JSX.Element => {
       [Date.now().toString()]: {
         name,
         description,
-        end_date,
-        start_date,
-        status: 'in progress',
+        end_date: roundDate(end_date),
+        start_date: roundDate(start_date),
+        status: getStatus(start_date),
         created_at: new Date(),
         subtasks: subtasks,
       },
@@ -68,6 +82,8 @@ const TaskForm: FC = (): JSX.Element => {
     };
 
     dispatch(setData({ payload: userData }));
+
+    console.log(userData);
 
     return userData;
   };

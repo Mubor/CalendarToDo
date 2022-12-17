@@ -3,11 +3,28 @@ import styled from 'styled-components';
 import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import { baseTheme } from '../../domain/styles/theme';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../domain/state/store';
+import { setStatus } from '../../domain/state/user';
 
-const TaskCardHeader: FC = (): JSX.Element => {
+type Id = {
+  id: string;
+};
+
+const TaskCardHeader: FC<Id> = ({ id }): JSX.Element => {
+  const dispatch = useDispatch();
+
+  const taskChangeStatus = (status) => {
+    dispatch(setStatus({ payload: { key: id, status: status } }));
+  };
+
   return (
     <TaskCardHeaderWrapper>
-      <TaskCardButton>
+      <TaskCardButton
+        onClick={() => {
+          taskChangeStatus('done');
+        }}
+      >
         <DoneIcon
           sx={{
             fill: baseTheme.colors.accept,

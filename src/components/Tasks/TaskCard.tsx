@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import TaskCardHeader from './TaskCardHeader';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../domain/state/store';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
+import { baseTheme } from '../../domain/styles/theme';
 
 type ID = {
   id: string;
@@ -19,19 +22,21 @@ const TaskCard: FC<ID> = ({ id }): JSX.Element => {
   return (
     <TaskCardWrapper>
       <TaskCardContainer isBack={isBack}>
-        <TaskCardHeader />
         <CardFront>
           <TaskCardHeaderWrapper>
             <TaskCardHeader />
           </TaskCardHeaderWrapper>
+
           <TextItemWrapper onClick={handleClick}>
             <TextItem>{task.name}</TextItem>
           </TextItemWrapper>
         </CardFront>
+
         <CardBack>
           <TaskCardHeaderWrapper>
             <TaskCardHeader />
           </TaskCardHeaderWrapper>
+
           <TextItemWrapper onClick={handleClick}>
             <TextItem>{task.start_date.toString()}</TextItem>
             <TextItem>{task.end_date.toString()}</TextItem>

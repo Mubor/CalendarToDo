@@ -5,6 +5,7 @@ import { DatabaseRepository } from '../ports/db-repository.js';
 import { SignUpCommand } from '../commands/SignUpCommand.js';
 import { SignInCommand } from '../commands/SignInCommand.js';
 import { UpdateCommand } from '../commands/UpdateCommand.js';
+import { async } from 'q';
 
 
 export class Controller {
@@ -45,7 +46,7 @@ export class Controller {
 			}
 		}
 		
-		handleSignIn = async(req: Request, res: Response) : Promise<void> => {
+	handleSignIn = async(req: Request, res: Response) : Promise<void> => {
 		const body = req.body;
 		const result = await new SignInCommand(this.dbRepository).execute(body);
 
@@ -62,9 +63,9 @@ export class Controller {
 					message:'successfully signed in',
 					body,
 					record: result,
-				});
-			}
+			});
 		}
+	}
 
 	handleUpdate = async(req: Request, res: Response):Promise<void> => {
 		const body = req.body;
@@ -87,66 +88,4 @@ export class Controller {
 				});
 		}
 	}
-
-	
-	// handleGet = async (req: Request<GetParams, ExpressSuccessResponse<AppointmentRecord>>): Promise<AppointmentRecord> => {
-	// 	const { id } = req.params;
-
-	// 	const appointment = await new GetAppointmentCommand(this.appointmentRepository).execute({
-	// 		id,
-	// 	});
-
-	// 	const record = Appointment.toRecord(appointment);
-
-	// 	this.nodeCliOutput.print(`[${record.id}] has been found`);
-
-	// 	return Appointment.toRecord(appointment);
-	// }
-
-	// handleList = async (req: Request<unknown, ExpressSuccessResponse<AppointmentRecord[]>, unknown, ListQuery>): Promise<AppointmentRecord[]> => {
-	// 	const { completed, limit } = req.query;
-
-	// 	const appointments = await new ListAppointmentCommand(this.appointmentRepository).execute({ completed, limit});
-
-	// 	this.nodeCliOutput.print(`[${appointments.length} records] has been found`);
-
-	// 	return appointments.map(Appointment.toRecord);
-	// } 
-
-	// handlePick = async (req: Request<PickParams, unknown, PickBody>): Promise<void> => {
-	// 	const { id } = req.params;
-	// 	const { fullName, email } = req.body;
-
-	// 	await new PickAppointmentCommand(this.appointmentRepository).execute({ id, operator: {
-	// 		fullName,
-	// 		email
-	// 	}});
-
-	// 	this.nodeCliOutput.print(`[${id} record] has been picked`);
-	// } 
-
-	// handleDelete = async (req: Request<GetParams, ExpressSuccessResponse<string>>, res: Response): Promise<void> => {
-	// 	const { id } = req.params;
-		
-	// 	await new DeleteAppointmentCommand(this.appointmentRepository).execute({ id });
-
-	// 	this.nodeCliOutput.print(`[${id}] has been deleted`);
-
-	// 	res.status(204);
-	// }
-
-	// handleComplete = async (req: Request<GetParams, ExpressSuccessResponse<string>>, res: Response): Promise<AppointmentRecord> => {
-	// 	const { id } = req.params;
-		
-	// 	const appointment = await new CompleteAppointmentCommand(this.appointmentRepository).execute({ id });
-
-	// 	this.nodeCliOutput.print(`[${id}] has been completed`);
-
-	// 	res.status(200);
-
-	// 	return Appointment.toRecord(appointment);
-	// }
-
-
-
 }

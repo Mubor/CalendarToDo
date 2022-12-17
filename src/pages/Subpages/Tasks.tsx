@@ -1,46 +1,47 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import TasksNav from '../../components/Tasks/TasksNav';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../domain/state/store';
-import TaskCard from '../../components/Tasks/TaskCard';
+import { Routes, Route, Link } from 'react-router-dom';
+import TasksWrapper from '../../components/Tasks/TasksWrapper';
 
 const Tasks: FC = (): JSX.Element => {
-  const user = useSelector((state: RootState) => state.user.currentUser);
-  const taskKeys = Object.keys(user.tasks);
-
   return (
     <>
-      <TasksNav />
-      <TaskCardsWrapper>
-        {taskKeys.map((key: string, index: number) => {
-          return (
-            <React.Fragment key={index}>
-              <TaskCard id={key} />
-            </React.Fragment>
-          );
-        })}
-      </TaskCardsWrapper>
+      <TaskNav>
+        <Link to='planned'>Planned</Link>
+        <Link to='current'>In Progress</Link>
+        <Link to='done'>Done</Link>
+        <Link to='failed'>Failed</Link>
+      </TaskNav>
+
+      <Routes>
+        <Route index element={<TasksWrapper status='planned' />} />
+        <Route path='planned' element={<TasksWrapper status='planned' />} />
+        <Route path='current' element={<TasksWrapper status='current' />} />
+        <Route path='done' element={<TasksWrapper status='done' />} />
+        <Route path='failed' element={<TasksWrapper status='failed' />} />
+      </Routes>
     </>
   );
 };
 
-const TaskCardsWrapper = styled.div`
+const TaskNav = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  padding-top: 20px;
 
   @media (${({ theme }) => theme.media.tablets}) {
-    gap: 12px;
+    justify-content: center;
+    gap: 20px;
   }
 
   @media (${({ theme }) => theme.media.smallScreens}) {
-    gap: 14px;
+    padding-top: 0;
   }
 
   @media (${({ theme }) => theme.media.desktops}) {
-    gap: 20px;
+    gap: 60px;
+    padding-bottom: 26px;
   }
 `;
 

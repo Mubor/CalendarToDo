@@ -31,18 +31,7 @@ export const SignUp: FC = (): JSX.Element => {
         }}
         onSubmit={async (values) => {
           const request = { login: values.login, password: values.password };
-
-          // const response = await fetch('/signUp', {
-          //   method: 'POST',
-          //   headers: new Headers({ 'content-type': 'application/json' }),
-          //   body: JSON.stringify(request),
-          // });
-
           const { data: response } = await axios.post('/signUp', request);
-
-          // const responseData = await response.json();
-
-          console.log(response);
 
           if (response.status === 200) {
             dispatch(setData({ payload: response.record }));
