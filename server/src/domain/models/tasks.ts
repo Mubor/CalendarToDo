@@ -1,4 +1,4 @@
-import { UserRecord, UserData, TaskData, UndertaskData } from '../types.js';
+import { UserRecord, UserData, TaskData, SubtaskData } from '../types.js';
 
 export class Tasks {
     private record: UserRecord;

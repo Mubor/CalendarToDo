@@ -7,6 +7,7 @@ import { Formik } from 'formik';
 import { InputField } from '../../components/FormComponents/InputFields';
 import { SubmitButton } from '../../components/FormComponents/Buttons';
 import { setData } from '../../domain/state/user';
+import axios from 'axios';
 
 export const SignUp: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -30,23 +31,13 @@ export const SignUp: FC = (): JSX.Element => {
         }}
         onSubmit={async (values) => {
           const request = { login: values.login, password: values.password };
-          console.log('here');
+          const { data: response } = await axios.post('/signUp', request);
 
-          const response = await fetch('/signUp', {
-            method: 'POST',
-            headers: new Headers({ 'content-type': 'application/json' }),
-            body: JSON.stringify(request),
-          });
-
-          const responseData = await response.json();
-
-          console.log(responseData);
-
-          if (responseData.status === 200) {
-            dispatch(setData({ payload: responseData.record }));
+          if (response.status === 200) {
+            dispatch(setData({ payload: response.record }));
             navigate('/main');
           } else {
-            alert(responseData.message);
+            alert(response.message);
           }
         }}
         validateOnBlur

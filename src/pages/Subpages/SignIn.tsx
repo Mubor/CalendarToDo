@@ -7,6 +7,7 @@ import { InputField } from '../../components/FormComponents/InputFields';
 import { SubmitButton } from '../../components/FormComponents/Buttons';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../domain/state/user';
+import axios from 'axios';
 
 export const SignIn: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -29,22 +30,22 @@ export const SignIn: FC = (): JSX.Element => {
         onSubmit={async (values) => {
           const request = { login: values.login, password: values.password };
 
-          const response = await fetch('/signIn', {
-            method: 'POST',
-            headers: new Headers({ 'content-type': 'application/json' }),
-            body: JSON.stringify(request),
-          });
+          // const response = await fetch('/signIn', {
+          //   method: 'POST',
+          //   headers: new Headers({ 'content-type': 'application/json' }),
+          //   body: JSON.stringify(request),
+          // });
 
-          const responseData = await response.json();
+          const { data: response } = await axios.post('/signIn', request);
 
-          console.log(responseData);
+          console.log(response);
 
-          if (responseData.status === 200) {
-            console.log(responseData.record);
-            dispatch(setData({ payload: responseData.record }));
+          if (response.status === 200) {
+            console.log(response.record);
+            dispatch(setData({ payload: response.record }));
             navigate('/main');
           } else {
-            alert(responseData.message);
+            alert(response.message);
           }
         }}
         validateOnBlur

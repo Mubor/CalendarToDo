@@ -1,12 +1,12 @@
-type UndertaskData = {
+type SubtaskData = {
   [id: string]: {
-    name: string;
-    description: string;
+    subtaskName: string;
+    subtaskDescription: string;
     date: Date;
   };
 };
 
-type TaskData = {
+export type TaskData = {
   [id: string]: {
     status: string;
     name: string;
@@ -14,7 +14,7 @@ type TaskData = {
     start_date: Date;
     end_date: Date;
     created_at: Date;
-    undertasks: UndertaskData;
+    subtasks: SubtaskData;
   };
 };
 

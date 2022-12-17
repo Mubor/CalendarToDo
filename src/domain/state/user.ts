@@ -19,6 +19,10 @@ export const currentUser = createSlice({
     setData: (state, data) => {
       state.currentUser = data.payload.payload;
     },
+    // setStatus: (state, data) => {
+    //   console.log(data.payload);
+    //   state.currentUser.tasks[data.payload.key] = data.payload.status;
+    // },
   },
 });
 

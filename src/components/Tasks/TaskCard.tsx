@@ -1,15 +1,19 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import TaskCardHeader from './TaskCardHeader';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../domain/state/store';
+import DoneIcon from '@mui/icons-material/Done';
+import CloseIcon from '@mui/icons-material/Close';
+import { baseTheme } from '../../domain/styles/theme';
 
-interface TasksCardType {
-  taskName: string;
-  startDate: string;
-  endDate: string;
-}
+type ID = {
+  id: string;
+};
 
-const TasksCard: FC<TasksCardType> = ({ taskName, startDate, endDate }): JSX.Element => {
+const TaskCard: FC<ID> = ({ id }): JSX.Element => {
   const [isBack, setIsBack] = useState(false);
+  const task = useSelector((state: RootState) => state.user.currentUser.tasks[id]);
 
   const handleClick = () => {
     setIsBack(!isBack);
@@ -18,22 +22,24 @@ const TasksCard: FC<TasksCardType> = ({ taskName, startDate, endDate }): JSX.Ele
   return (
     <TaskCardWrapper>
       <TaskCardContainer isBack={isBack}>
-        <TaskCardHeader />
         <CardFront>
           <TaskCardHeaderWrapper>
             <TaskCardHeader />
           </TaskCardHeaderWrapper>
+
           <TextItemWrapper onClick={handleClick}>
-            <TextItem>{taskName}</TextItem>
+            <TextItem>{task.name}</TextItem>
           </TextItemWrapper>
         </CardFront>
+
         <CardBack>
           <TaskCardHeaderWrapper>
             <TaskCardHeader />
           </TaskCardHeaderWrapper>
+
           <TextItemWrapper onClick={handleClick}>
-            <TextItem>{startDate}</TextItem>
-            <TextItem>{endDate}</TextItem>
+            <TextItem>{task.start_date.toString()}</TextItem>
+            <TextItem>{task.end_date.toString()}</TextItem>
           </TextItemWrapper>
         </CardBack>
       </TaskCardContainer>
@@ -133,4 +139,4 @@ const TaskCardHeaderWrapper = styled.div`
   background-color: transparent;
 `;
 
-export default TasksCard;
+export default TaskCard;

@@ -5,30 +5,30 @@ export type UserData = {
     password: string
 }
 
-export type UndertaskData = {
-    [id:string]: {
-        name: string,
-        description: string,
-        date: Date
-    }
-}
-
+export type SubtaskData = {
+    [id: string]: {
+      subtaskName: string;
+      subtaskDescription: string;
+      date: Date;
+    };
+};
+  
 export type TaskData = {
     [id: string]: {
-        status: string,
-        name: string,
-        description: string,
-        start_date: Date,
-        end_date: Date,
-        created_at: Date,
-        undertasks: UndertaskData
-    }
-}
-
+      status: string;
+      name: string;
+      description: string;
+      start_date: Date;
+      end_date: Date;
+      created_at: Date;
+      subtasks: SubtaskData;
+    };
+};
+  
 export type UserRecord = {
-    login: string,
-    tasks: TaskData,
-}
+    login: string;
+    tasks: TaskData;
+};
 
 export type DBCollection = {
     users: Collection<Document>
