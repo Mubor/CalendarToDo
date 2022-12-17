@@ -19,13 +19,13 @@ export const currentUser = createSlice({
     setData: (state, data) => {
       state.currentUser = data.payload.payload;
     },
-    setStatus: (state, data) => {
-      console.log(data.payload);
-      state.currentUser.tasks[data.payload.key] = data.payload.status;
-    },
+    // setStatus: (state, data) => {
+    //   console.log(data.payload);
+    //   state.currentUser.tasks[data.payload.key] = data.payload.status;
+    // },
   },
 });
 
-export const { setData, setStatus } = currentUser.actions;
+export const { setData } = currentUser.actions;
 
 export default currentUser.reducer;

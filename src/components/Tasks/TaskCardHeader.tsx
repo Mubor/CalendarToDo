@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { baseTheme } from '../../domain/styles/theme';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../domain/state/store';
-import { setStatus } from '../../domain/state/user';
+// import { setStatus } from '../../domain/state/user';
 
 type Id = {
   id: string;
@@ -14,16 +14,16 @@ type Id = {
 const TaskCardHeader: FC<Id> = ({ id }): JSX.Element => {
   const dispatch = useDispatch();
 
-  const taskChangeStatus = (status) => {
-    dispatch(setStatus({ payload: { key: id, status: status } }));
-  };
+  // const taskChangeStatus = (status) => {
+  //   dispatch(setStatus({ payload: { key: id, status: status } }));
+  // };
 
   return (
     <TaskCardHeaderWrapper>
       <TaskCardButton
-        onClick={() => {
-          taskChangeStatus('done');
-        }}
+      // onClick={() => {
+      //   taskChangeStatus('done');
+      // }}
       >
         <DoneIcon
           sx={{
