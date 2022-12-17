@@ -11,7 +11,7 @@ type Id = {
   id: string;
 };
 
-const TaskCardHeader: FC<Id> = ({ id }): JSX.Element => {
+const TaskCardHeader: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
   // const taskChangeStatus = (status) => {
