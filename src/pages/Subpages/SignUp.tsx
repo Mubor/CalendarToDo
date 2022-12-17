@@ -13,8 +13,10 @@ export const SignUp: FC = (): JSX.Element => {
 
   const validationSchema = Yup.object({
     login: Yup.string().required('This is a required field'),
-    password: Yup.string().required('Ты шо надумал себе, голова?'),
-    passwordConfirm: Yup.string().required('Ты шо надумал себе, голова?'),
+    password: Yup.string().required('This is a required field'),
+    passwordConfirm: Yup.string()
+      .required('This is a required field')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match'),
   });
 
   const navigate = useNavigate();
