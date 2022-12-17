@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../../components/FormComponents/InputFields';
 import { SubmitButton } from '../../components/FormComponents/Buttons';
 import { useDispatch } from 'react-redux';
 import { setData } from '../../domain/state/user';
+import { FormContainer, FormName, FormFooterWrapper, SignLink } from '../../domain/styles/SignInUp';
 
 export const SignIn: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ export const SignIn: FC = (): JSX.Element => {
             />
             <InputField
               attr={{
-                type: 'text',
+                type: 'password',
                 name: 'password',
                 placeholder: 'Input your password',
                 labelText: 'Password',
@@ -77,7 +77,7 @@ export const SignIn: FC = (): JSX.Element => {
             />
 
             <FormFooterWrapper>
-              <Link to='/signup'>Sign up</Link>
+              <SignLink to='/signup'>Sign up</SignLink>
               <SubmitButton text={'Sign in'} />
             </FormFooterWrapper>
           </form>
@@ -86,25 +86,3 @@ export const SignIn: FC = (): JSX.Element => {
     </FormContainer>
   );
 };
-
-const FormContainer = styled.div`
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-`;
-
-const FormName = styled.p`
-  font-size: 20px;
-  text-align: center;
-  padding: 20px 0 0;
-
-  @media (${({ theme }) => theme.media.smallScreens}) {
-    padding: 0;
-  }
-`;
-
-const FormFooterWrapper = styled.div`
-  display: flex;
-  flex-direction: space-around;
-`;

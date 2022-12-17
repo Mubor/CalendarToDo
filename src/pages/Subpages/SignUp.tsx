@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { InputField } from '../../components/FormComponents/InputFields';
 import { SubmitButton } from '../../components/FormComponents/Buttons';
 import { setData } from '../../domain/state/user';
+import { FormContainer, FormName, FormFooterWrapper, SignLink } from '../../domain/styles/SignInUp';
 
 export const SignUp: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ export const SignUp: FC = (): JSX.Element => {
             />
             <InputField
               attr={{
-                type: 'text',
+                type: 'password',
                 name: 'password',
                 placeholder: 'Input your password',
                 labelText: 'Password',
@@ -81,7 +81,7 @@ export const SignUp: FC = (): JSX.Element => {
             />
             <InputField
               attr={{
-                type: 'text',
+                type: 'password',
                 name: 'passwordConfirm',
                 placeholder: 'Confirm your password',
                 labelText: 'Password confirm',
@@ -89,7 +89,7 @@ export const SignUp: FC = (): JSX.Element => {
               validationParams={formikData}
             />
             <FormFooterWrapper>
-              <Link to='/signin'>Sign in</Link>
+              <SignLink to='/signin'>Sign in</SignLink>
               <SubmitButton text={'Sign up'} />
             </FormFooterWrapper>
           </form>
@@ -98,25 +98,3 @@ export const SignUp: FC = (): JSX.Element => {
     </FormContainer>
   );
 };
-
-const FormContainer = styled.div`
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-`;
-
-const FormName = styled.p`
-  font-size: 20px;
-  text-align: center;
-  padding: 20px 0 0;
-
-  @media (${({ theme }) => theme.media.smallScreens}) {
-    padding: 0;
-  }
-`;
-
-const FormFooterWrapper = styled.div`
-  display: flex;
-  flex-direction: space-around;
-`;
