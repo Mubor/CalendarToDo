@@ -6,17 +6,36 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { baseTheme } from '../domain/styles/theme';
-import { routes } from '../utils/constants';
 
 const LeftBar: FC = (): JSX.Element => {
   const { pathname } = useLocation();
-
+  console.log(pathname);
   return (
     <LeftBarContainer>
       <SwitchMonth />
-      <Link to='calendar'>Calendar</Link>
-      <Link to='tasks'>Tasks</Link>
-      <Link to='creation'>Create</Link>
+      <NavLink to='calendar' isCurrentRoute={pathname === '/main/calendar' || pathname === '/main'}>
+        <CalendarMonthIcon
+          sx={{
+            fill:
+              pathname === '/main/calendar' || pathname === '/main'
+                ? baseTheme.colors.font.secondary
+                : '',
+          }}
+        />
+        Calendar
+      </NavLink>
+      <NavLink to='tasks' isCurrentRoute={pathname === '/main/tasks'}>
+        <AssignmentIcon
+          sx={{ fill: pathname === '/main/tasks' ? baseTheme.colors.font.secondary : '' }}
+        />
+        Tasks
+      </NavLink>
+      <NavLink to='creation' isCurrentRoute={pathname === '/main/creation'}>
+        <AddCircleIcon
+          sx={{ fill: pathname === '/main/creation' ? baseTheme.colors.font.secondary : '' }}
+        />
+        Create new task
+      </NavLink>
     </LeftBarContainer>
   );
 };
