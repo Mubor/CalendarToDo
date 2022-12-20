@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../domain/state/store';
 // import { setStatus } from '../../domain/state/user';
 
-type Id = {
-  id: string;
-};
+// typgit adde Id = {
+//   id: string;
+// };
 
 const TaskCardHeader: FC = (): JSX.Element => {
   const dispatch = useDispatch();

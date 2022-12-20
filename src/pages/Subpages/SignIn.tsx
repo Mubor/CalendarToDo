@@ -27,15 +27,16 @@ export const SignIn: FC = (): JSX.Element => {
           password: '',
         }}
         onSubmit={async (values) => {
+          // button lock
           const request = { login: values.login, password: values.password };
 
           const response = await fetch('/signIn', {
             method: 'POST',
             headers: new Headers({ 'content-type': 'application/json' }),
             body: JSON.stringify(request),
-          });
+          }); // request initialization
 
-          const responseData = await response.json();
+          const responseData = await response.json(); // request executing
 
           console.log(responseData);
 
@@ -46,6 +47,7 @@ export const SignIn: FC = (): JSX.Element => {
           } else {
             alert(responseData.message);
           }
+          // button unlock
         }}
         validateOnBlur
         validationSchema={validationSchema}
